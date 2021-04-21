@@ -1,0 +1,17 @@
+peaks:=C13HSQC,N15HSQC,HNCA,HNcaCO,HNCO,HNcoCA,CBCANH,CBCAcoNH,HBHAcoNH,CcoNH,HCcoNH
+sequence:=demo.seq
+shiftreference:=ref.prot
+library:=cyana.lib
+
+//expected peak file names are created from the first line: HNCA_exp.peaks and so on
+//the rest is not read
+assigncs_accH=0.03
+assigncs_accC=0.4
+assigncs_accN=assigncs_accC
+tolerance:=$assigncs_accH,$assigncs_accH,$assigncs_accC
+randomseed=101
+
+command select_atoms
+  atom select "* - CZ ?H* @ARG - ?Z* @LYS"
+end
+
