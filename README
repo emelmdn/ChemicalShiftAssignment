@@ -18,8 +18,8 @@ The source code of the chemical shift assignment project  is existing in the fol
         chemicalShiftAssignment.java: This class is implemented to define the chemical shift assignment problem. It implements already existing Problem interface of the MOEA problem to define our chemical shift assignment problem. 
                     All attributes of the problem are defined in this class. Additionally, the newSolution() method of this class creates a new solution according to the defined size and range of the expected peaks.
                     The evaluate() method of this class is used to evaluate the objective values of a solution candidate. This method gets the solution candidate as input parameter and evaluates its objective values by calling the evaluate() method, which calls the evaluateObjectives() method to make the objective function calculations. Please see the comments in the source code for more detailed information.
-        chemicalShiftAssignmentExample.java
-        ChemicalShiftAssignmentInitialization.java
+        ChemicalShiftAssignmentInitialization.java: This class implements the initialization method for the population of evolutionary optimization algorithm. The constructor gets the Problem objecct as input parameter, which has the initialization type (either all random, or all with the construction logic, or half-half)
+                    The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class. 
         CSTable.java: This class is used to define the input values of the CSTable of Cyana library file. This class contains the details of the reference chemical shift assignment values of the atoms and an array of CSTableReference class objects. 
         CSTableReference.java: This class includes the details of a reference values for an atom in a specific residue. 
         Derf.java
