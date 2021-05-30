@@ -12,21 +12,25 @@ For this reason, this repository contains all the implementation of the MOEA fra
 The source code of the chemical shift assignment project  is existing in the following path: ChemicalShiftAssignment/src/org/moeaframework/problem/chemicalShiftAssignment/
   - The source code of the chemical shift assignment project are composed of the following files in this branch. 
         Assignment.java
-        Atom.java
+        Atom.java: class contains the relevant information for an atom in the structure. Not only static values, but also dynamic values exist in the Atom class. The static values are defined as soon as the input files are read such as name, accuracy, coordinates, expected peaks, covalent connectivity atoms, reference frequency, name…etc. 
+                    The dynamic values are the ones that depend on the selected solution candidate, i.e. the assignment. Some of these values are: global score, assigned flag, average frequency… etc. 
         AtomType.java
-        chemicalShiftAssignment.java: This class is implemented to define the chemical shift assignment problem. It implements already existing Problem interface of the MOEA problem to define our chemical shift assignment problem.
+        chemicalShiftAssignment.java: This class is implemented to define the chemical shift assignment problem. It implements already existing Problem interface of the MOEA problem to define our chemical shift assignment problem. 
+                    All attributes of the problem are defined in this class. Additionally, the newSolution() method of this class creates a new solution according to the defined size and range of the expected peaks.
+                    The evaluate() method of this class is used to evaluate the objective values of a solution candidate. This method gets the solution candidate as input parameter and evaluates its objective values by calling the evaluate() method, which calls the evaluateObjectives() method to make the objective function calculations. Please see the comments in the source code for more detailed information.
         chemicalShiftAssignmentExample.java
         ChemicalShiftAssignmentInitialization.java
         CSTable.java
         CSTableReference.java
         Derf.java
-        DihedralAngle.java
+        DihedralAngle.java: This class is used to define a dihedral angle, which is composed of its name, atoms and rotatable atom information. 
         Library.java
         ManualRun.java
         Peak.java
         RangeTree.java
-        Residue.java
-        RunHyperheuristic.java
+        Residue.java: This class is used to store the residue structure including the dihedral angles and the atoms of a residue, which have their own classes.
+        RunHyperheuristic.java: This is the main class of the chemical shift assignment project. Configuration values such as run-, tuning-, evaluations-count, algorithm name, population size, crossover and mutation rate and initMode (initialization mode) are defined here. 
+                    The algorithms NSGA2, NSGA3, GA and Hyperheuristics constructors are also called from this method. 
         Sequence.java
         ShiftReference.java
         Spectrum.java
