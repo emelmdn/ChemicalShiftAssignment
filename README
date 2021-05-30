@@ -1,17 +1,23 @@
-SİL /*
-- Explain in the GitHub repository the steps to make the experiment reproducible, in addition to explicitly indicating which files are the datasets in the repository.
-- Indicate which file (s) correspond to the multiobjective model because I have reviewed the source code, and there are models that are not related to the scientific article. 
-*/
 The Chemical Shift Assignment Project
 
 This is the source code of the chemical shift assignment project that is developed on the MOEA framework. ( <http://www.moeaframework.org/>)
 
-The repository contains all the implementation of the MOEA framework. The chemical shift assignment problem is implemented as an additional problem in this framework. 
-For this reason, this repository contains all the implementation of the MOEA framework, but only some models of this framework are used in the chemical shift assignment project.
+The repository contains all the implementation of the MOEA framework. The chemical shift assignment problem is implemented as an additional problem in this framework. For this reason, this repository contains all the implementation of the MOEA framework, but only some models of this framework are used in the chemical shift assignment project.
 
-1.	The chemical shift assignment problem implementation
-The source code of the chemical shift assignment project is existing in the following path: ChemicalShiftAssignment/src/org/moeaframework/problem/chemicalShiftAssignment/. There are also the input files of the problem in this path. Details are explained below:
-1.1.	The source code of the chemical shift assignment project is composed of the following files in this path. 
+1.	The steps to make the chemical shift assignment problem reproducible:
+        -	Java Development Kit (JDK) version 6 or later version should be installed.
+        -	The chemical shift assignment problem is implemented on the MOEA framework that is built in the Eclipse. So, Eclipse should be installed to run the chemical shift assignment problem.
+        -	The source code should be imported into Eclipse as new Java project.
+        -	The input files should be updated accordingly. These files are defined in the 2.2. subchapter below. The source code in GitHub already has some input files to run an example.
+        -	The main function of our chemical shift assignment problem is the “RunHyperheuristic.java” class in the following path. 
+        /ChemicalShiftAssignment_GitHub/src/org/moeaframework/problem/chemicalShiftAssignment/RunHyperheuristic.java
+        -	If needed, the input parameters of our algorithms can be changed in the configuration values of the main function in RunHyperheuristic.java class. 
+        -	For running the program: The  main class (RunHyperheuristic.java) should be “Run As” by right-click, “Java Application”. 
+        -	Then the program will start automatically.
+        -	The program will write its results, the chemical shift assignment values for each atom, in its output files, which are defined in the 2.3 subchapter below.
+
+2.	The chemical shift assignment problem implementation: The source code of the chemical shift assignment project is existing in the following path: ChemicalShiftAssignment/src/org/moeaframework/problem/chemicalShiftAssignment/. There are also the input files of the problem in this path. Details are explained below:
+2.1.	The source code of the chemical shift assignment project is composed of the following files in this path. 
         Assignment.java: This class is implemented to define the chemical shift assignment of the expected peaks onto the measured peak
         Atom.java: class contains the relevant information for an atom in the structure. Not only static values but also dynamic values exist in the Atom class. The static values are defined as soon as the input files are read such as name, accuracy, coordinates, expected peaks, covalent connectivity atoms, reference frequency, name…etc. 
                     The dynamic values are the ones that depend on the selected solution candidate, i.e. the assignment. Some of these values are: global score, assigned flag, average frequency… etc. 
@@ -35,43 +41,42 @@ The source code of the chemical shift assignment project is existing in the foll
         Sequence.java: This class is implemented to save the residue sequence values of the NMR experiments. These values are not used in the chemical shift assignment project.
         ShiftReference.java: This class is developed to save the reference chemical shift values of the atoms. 
         Spectrum.java: This class saves all spectrum-related attributes and their functions for all spectrum types of NMR.
-1.2.	The input files of the problem are also in this path. These files are defined below:
+2.2.	The input files of the problem are also in this path. These files are defined below:
         xxx_exp.peaks: These are the expected peak files that are given as input into our project. 
         xxx.peaks: These are the measured peak files that are given as input into our project.
         configuration.txt: This file defines the NMR spectra as peaks variable, the name of the sequence file, the name of the shift reference file, and the name of the CYANA library file
         cyana.lib: This is the CYANA library file. This file contains the atoms, their connectivity, and bonds for each residue, along with the connectivity patterns for each spectrum that defines the pattern of the atoms that are expected to give rise to a peak in the NMR experiment.  
         demo.seq: The sequence of the amino acids that bond to each other to create the protein of the experiment is provided in the demo.seq file. 
         ref.prot: The reference chemical shift values of the atoms are defined in this file. 
-1.3.	The output files of the problem are created in this path: /ChemicalShiftAssignment_GitHub/ChemicalShiftAssignmentResults
+2.3.	The output files of the problem are created in this path: /ChemicalShiftAssignment_GitHub/ChemicalShiftAssignmentResults
         Run results: For each run, one folder is created in this path with the number of the run count. (For example: "1. Run" folder)
         Repetition results: The result of each repetition of our algorithm is saved into a separate folder. (For example: "1. Run/3" shows the result of the 3rd repetition in the 1st run.) 
-1.4.	Further development for the chemical shift assignment project is implemented in the following classes:
-1.4.1.	Hillclimber algorithm: We implemented this hillclimber algorithm from scratch in the MOEA framework that checks each expected peak of the assignment and searches for a better measured peak in its neighborhood. It is developed in this path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/HillClimber.java as an additional algorithm in the MOEA framework. The hillclimber algorithm extends the “AbstractEvolutionaryAlgorithm” of the MOEA framework that is implemented in the following path:
-/ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/AbstractEvolutionaryAlgorithm.java
-1.4.2.	Hyperheuristic algorithm: We combined the hill-climbing algorithm with the NSGA2, NSGA3, and GA algorithms to find better local optima. For that, we implemented this hyper-heuristic algorithm in the MOEA framework that combines the selected multi-objective algorithm (NSGA2, NSGA3 or GA) with the hill-climbing algorithm. Each iteration of the NSGA2, NSGA3 or GA algorithms is followed by one iteration of the hill-climbing algorithm. This hyperheuristic algorithm is developed in the following path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/Hyperheuristic.java
-        
-1.5.	Other classes of the MOEA framework that correspond to the multiobjective model: All of the classes defined in 1.1. subchapter above belongs to the multiobjective model of the chemical shift assignment project. The problem is defined with these classes by calling the methods of the MOEA framework. These methods are already explained in 1.1. with the information where each 
-1.5.1.	Core: The core classes of the MOEA framework are called by our algorithms to use the main functionalities of the multi-objective optimization algorithms. These classes are in the following path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/
-For example: The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class.
-Another example: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/Selection.java
-1.5.2.	Core.operator: These classes are called to use various operators of the MOEA framework. These classes are developed in this path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/operator/
-For example: The random initialization of the MOEA framework, which is called from our main function for the initialization where all the individuals are created randomly: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/operator/RandomInitialization.java
-Another example: TournamentSelection org.moeaframework.core.operator.TournamentSelection is called from our main function to define the selection operator. 
-1.5.3.	Core.Variable: The variable classes of the MOEA framework are called from our methods in order to define the variables for our assignments. The path of these classes are: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/variable/
-1.5.4.	Core.Comparator: The comparator classes of the MOEA framework are called from our methods to compare two given solution candidates. The path of these classes are: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/comparator/
-For example: the DominanceComparator.java class is called from our main function to define the comparator of the NSGA3 algorithm.
-1.5.5.	Core.Variation: The variation classes of the MOEA framework are called from our methods to define the variations of the multi-objective algorithms. org.moeaframework.core.variation
-1.5.6.	Core.spi: The variation classes of the MOEA framework are called from our methods to define the variations of the multi-objective algorithms. They are developed in the following path:org.moeaframework.core.spi
-1.5.7.	Core.problem: These classes of the MOEA framework are called from our methods to define the chemical shift assignment problem. These classes are defined in the following path of the MOEA framework: org.moeaframework.core.Problem
-1.5.8.	Algorithm: The algorithm classes of the MOEA framework are called from our methods. The path of these classes are: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/
-For example: The hillclimber class extends the “AbstractEvolutionaryAlgorithm” of the MOEA framework that is developed in the following path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/AbstractEvolutionaryAlgorithm.java
-Another example: ReferencePointNondominatedSortingPopulation.java is called from our Hyperheuristic.java class.
-1.5.9.	Algorithm.single: These classes of the MOEA framework are called from our methods to define the GA algorithm.
-For example: The following class is called from our main function to define the GA algorithm.
-/ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/single/GeneticAlgorithm.java
-Another example: The following class of the MOEA framework is called from our main function to define the comparator for the GA algorithm:
-/ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/single/AggregateObjectiveComparator.java
-1.5.10.	util: These classes of the MOEA framework are called from our methods to define the properties and attributes of the algorithms.
-For example: The following class is called from our main function to set the crossover and mutation rates for the algorithms.
-/ChemicalShiftAssignment_GitHub/src/org/moeaframework/util/TypedProperties.java
+2.4.	Further development for the chemical shift assignment project is implemented in the following classes:
+        2.4.1.	Hillclimber algorithm: We implemented this hillclimber algorithm from scratch in the MOEA framework that checks each expected peak of the assignment and searches for a better measured peak in its neighborhood. It is developed in this path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/HillClimber.java as an additional algorithm in the MOEA framework. The hillclimber algorithm extends the “AbstractEvolutionaryAlgorithm” of the MOEA framework that is implemented in the following path:
+        /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/AbstractEvolutionaryAlgorithm.java
+        2.4.2.	Hyperheuristic algorithm: We combined the hill-climbing algorithm with the NSGA2, NSGA3, and GA algorithms to find better local optima. For that, we implemented this hyper-heuristic algorithm in the MOEA framework that combines the selected multi-objective algorithm (NSGA2, NSGA3 or GA) with the hill-climbing algorithm. Each iteration of the NSGA2, NSGA3 or GA algorithms is followed by one iteration of the hill-climbing algorithm. This hyperheuristic algorithm is developed in the following path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/Hyperheuristic.java
 
+2.5.	Other classes of the MOEA framework that correspond to the multiobjective model: All of the classes defined in 1.1. subchapter above belongs to the multiobjective model of the chemical shift assignment project. The problem is defined with these classes by calling the methods of the MOEA framework. These methods are already explained in 1.1. with the information where each 
+        2.5.1.	Core: The core classes of the MOEA framework are called by our algorithms to use the main functionalities of the multi-objective optimization algorithms. These classes are in the following path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/
+        For example: The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class.
+        Another example: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/Selection.java
+        2.5.2.	Core.operator: These classes are called to use various operators of the MOEA framework. These classes are developed in this path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/operator/
+        For example: The random initialization of the MOEA framework, which is called from our main function for the initialization where all the individuals are created randomly: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/operator/RandomInitialization.java
+        Another example: TournamentSelection org.moeaframework.core.operator.TournamentSelection is called from our main function to define the selection operator. 
+        2.5.3.	Core.Variable: The variable classes of the MOEA framework are called from our methods in order to define the variables for our assignments. The path of these classes are: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/variable/
+        2.5.4.	Core.Comparator: The comparator classes of the MOEA framework are called from our methods to compare two given solution candidates. The path of these classes are: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/core/comparator/
+        For example: the DominanceComparator.java class is called from our main function to define the comparator of the NSGA3 algorithm.
+        2.5.5.	Core.Variation: The variation classes of the MOEA framework are called from our methods to define the variations of the multi-objective algorithms. org.moeaframework.core.variation
+        2.5.6.	Core.spi: The variation classes of the MOEA framework are called from our methods to define the variations of the multi-objective algorithms. They are developed in the following path:org.moeaframework.core.spi
+        2.5.7.	Core.problem: These classes of the MOEA framework are called from our methods to define the chemical shift assignment problem. These classes are defined in the following path of the MOEA framework: org.moeaframework.core.Problem
+        2.5.8.	Algorithm: The algorithm classes of the MOEA framework are called from our methods. The path of these classes are: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/
+        For example: The hillclimber class extends the “AbstractEvolutionaryAlgorithm” of the MOEA framework that is developed in the following path: /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/AbstractEvolutionaryAlgorithm.java
+        Another example: ReferencePointNondominatedSortingPopulation.java is called from our Hyperheuristic.java class.
+        2.5.9.	Algorithm.single: These classes of the MOEA framework are called from our methods to define the GA algorithm.
+        For example: The following class is called from our main function to define the GA algorithm.
+        /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/single/GeneticAlgorithm.java
+        Another example: The following class of the MOEA framework is called from our main function to define the comparator for the GA algorithm:
+        /ChemicalShiftAssignment_GitHub/src/org/moeaframework/algorithm/single/AggregateObjectiveComparator.java
+        2.5.10.	util: These classes of the MOEA framework are called from our methods to define the properties and attributes of the algorithms.
+        For example: The following class is called from our main function to set the crossover and mutation rates for the algorithms.
+        /ChemicalShiftAssignment_GitHub/src/org/moeaframework/util/TypedProperties.java
