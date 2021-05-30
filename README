@@ -22,7 +22,7 @@ The source code of the chemical shift assignment project  is existing in the fol
                     The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class. 
         CSTable.java: This class is used to define the input values of the CSTable of Cyana library file. This class contains the details of the reference chemical shift assignment values of the atoms and an array of CSTableReference class objects. 
         CSTableReference.java: This class includes the details of a reference values for an atom in a specific residue. 
-        Derf.java
+        Derf.java: 
         DihedralAngle.java: This class is used to define a dihedral angle, which is composed of its name, atoms and rotatable atom information. 
         Library.java: This class combines all of these classes and represents the whole CYANA library. Firstly, the atom types are available in this class. Secondly, all of the available residues are present in a residue array of this class. 
                     Then the atoms’ references are presented in the CS table attribute of the Library class. As a summary, all of the relevant static properties of the NMR experiment are defined in the Library class and its subclasses. 
@@ -40,5 +40,8 @@ The source code of the chemical shift assignment project  is existing in the fol
 -> Sonuç dosylarının olduğu file'lar
 -> Algorithm hybrid için yazdığım kodlar
 -> moea'nın hangi kodlarını kullandığım
+   - The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class. 
+   - The main function RunHyperheuristic.java calls NSGA2, NSGA3, GA and Hyperheuristic methods.
+   - 
 -> bir deneyi nasıl yapabilir
 -> yukarıda istedikleri bilgiler
