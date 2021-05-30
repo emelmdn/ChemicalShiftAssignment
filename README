@@ -11,20 +11,21 @@ For this reason, this repository contains all the implementation of the MOEA fra
 
 The source code of the chemical shift assignment project  is existing in the following path: ChemicalShiftAssignment/src/org/moeaframework/problem/chemicalShiftAssignment/
   - The source code of the chemical shift assignment project are composed of the following files in this branch. 
-        Assignment.java
+        Assignment.java: This class is implemented to define the chemical shift assignment of the expected peaks onto the measured peak
         Atom.java: class contains the relevant information for an atom in the structure. Not only static values, but also dynamic values exist in the Atom class. The static values are defined as soon as the input files are read such as name, accuracy, coordinates, expected peaks, covalent connectivity atoms, reference frequency, name…etc. 
                     The dynamic values are the ones that depend on the selected solution candidate, i.e. the assignment. Some of these values are: global score, assigned flag, average frequency… etc. 
-        AtomType.java
+        AtomType.java: This class defines the atom types and their order.
         chemicalShiftAssignment.java: This class is implemented to define the chemical shift assignment problem. It implements already existing Problem interface of the MOEA problem to define our chemical shift assignment problem. 
                     All attributes of the problem are defined in this class. Additionally, the newSolution() method of this class creates a new solution according to the defined size and range of the expected peaks.
                     The evaluate() method of this class is used to evaluate the objective values of a solution candidate. This method gets the solution candidate as input parameter and evaluates its objective values by calling the evaluate() method, which calls the evaluateObjectives() method to make the objective function calculations. Please see the comments in the source code for more detailed information.
         chemicalShiftAssignmentExample.java
         ChemicalShiftAssignmentInitialization.java
-        CSTable.java
-        CSTableReference.java
+        CSTable.java: This class is used to define the input values of the CSTable of Cyana library file. This class contains the details of the reference chemical shift assignment values of the atoms and an array of CSTableReference class objects. 
+        CSTableReference.java: This class includes the details of a reference values for an atom in a specific residue. 
         Derf.java
         DihedralAngle.java: This class is used to define a dihedral angle, which is composed of its name, atoms and rotatable atom information. 
-        Library.java
+        Library.java: This class combines all of these classes and represents the whole CYANA library. Firstly, the atom types are available in this class. Secondly, all of the available residues are present in a residue array of this class. 
+                    Then the atoms’ references are presented in the CS table attribute of the Library class. As a summary, all of the relevant static properties of the NMR experiment are defined in the Library class and its subclasses. 
         ManualRun.java
         Peak.java
         RangeTree.java
