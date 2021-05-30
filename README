@@ -1,6 +1,39 @@
+SİL /*
+- Explain in the github repository the steps to make the experiment reproducible, in addition to explicitly indicating which files are the datasets in the repository.
+- Indicate which file (s) correspond to the multiobjective model because I have reviewed the source code and there are models that are not related to the scientific article. 
+*/
 The Chemical Shift Assignment Project
 
 This is the source code of the chemical shift assignment project that is developed on the MOEA framework. ( <http://www.moeaframework.org/>)
 
+The repository contains all the implementation of the MOEA framework. The chemical shift assignment problect is implemented as additional problem on this framework. 
+For this reason, this repository contains all the implementation of the MOEA framework, but only some models of this framework is used in the chemical shift assignment project.
 
+The source code of the chemical shift assignment project  is existing in the following path: ChemicalShiftAssignment/src/org/moeaframework/problem/chemicalShiftAssignment/
+  - The source code of the chemical shift assignment project are composed of the following files in this branch. 
+        Assignment.java
+        Atom.java
+        AtomType.java
+        chemicalShiftAssignment.java: This class is implemented to define the chemical shift assignment problem. It implements already existing Problem interface of the MOEA problem to define our chemical shift assignment problem.
+        chemicalShiftAssignmentExample.java
+        ChemicalShiftAssignmentInitialization.java
+        CSTable.java
+        CSTableReference.java
+        Derf.java
+        DihedralAngle.java
+        Library.java
+        ManualRun.java
+        Peak.java
+        RangeTree.java
+        Residue.java
+        RunHyperheuristic.java
+        Sequence.java
+        ShiftReference.java
+        Spectrum.java
 
+-> The other files in this path
+-> Sonuç dosylarının olduğu file'lar
+-> Algorithm hybrid için yazdığım kodlar
+-> moea'nın hangi kodlarını kullandığım
+-> bir deneyi nasıl yapabilir
+-> yukarıda istedikleri bilgiler
