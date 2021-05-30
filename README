@@ -11,7 +11,7 @@ For this reason, this repository contains all the implementation of the MOEA fra
 
 1. The chemical shift assignment problem implementation
 The source code of the chemical shift assignment project  is existing in the following path: ChemicalShiftAssignment/src/org/moeaframework/problem/chemicalShiftAssignment/. There are also the input files of the problem in this path. Details are explaiend below:
-  1.1. The source code of the chemical shift assignment project are composed of the following files in this path. 
+  1.1. The source code of the chemical shift assignment project is composed of the following files in this path. 
         Assignment.java: This class is implemented to define the chemical shift assignment of the expected peaks onto the measured peak
         Atom.java: class contains the relevant information for an atom in the structure. Not only static values, but also dynamic values exist in the Atom class. The static values are defined as soon as the input files are read such as name, accuracy, coordinates, expected peaks, covalent connectivity atoms, reference frequency, name…etc. 
                     The dynamic values are the ones that depend on the selected solution candidate, i.e. the assignment. Some of these values are: global score, assigned flag, average frequency… etc. 
@@ -44,18 +44,19 @@ The source code of the chemical shift assignment project  is existing in the fol
         ref.prot: The reference chemical shift values of the atoms are defined in this file. 
  1.3. The output files of the problem are created in this path: /ChemicalShiftAssignment_GitHub/ChemicalShiftAssignmentResults
         Run results: For each run, one folder is created in this path with the number of the run count. (For ex: "1. Run" folder)
-        Repetition results: The result of each repetition of our algorithm is saved into a separate folder. (For ex: "1. Run/3" shows the result of the 3rd repetition in the 1st run.)
-        
-
-
+        Repetition results: The result of each repetition of our algorithm is saved into a separate folder. (For ex: "1. Run/3" shows the result of the 3rd repetition in the 1st run.) 
+ 1.3. Further development for the chemical shift assignment project is implemented in the following classes:
+        Run results: F 1.3. The output files of the problem are created in this path: /ChemicalShiftAssignment_GitHub/ChemicalShiftAssignmentResults
+        Run results: F
+ 1.4. Further classes of the MOEA framework that corresponds to the multiobjective model:
+        - The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class. 
+        - The main function RunHyperheuristic.java calls NSGA2, NSGA3, GA and Hyperheuristic methods.
+        - The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class. 
 
 
 
 -> Sonuç dosylarının olduğu file'lar
 -> Algorithm hybrid için yazdığım kodlar
 -> moea'nın hangi kodlarını kullandığım
-   - The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class. 
-   - The main function RunHyperheuristic.java calls NSGA2, NSGA3, GA and Hyperheuristic methods.
-   - The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class. 
--> bir deneyi nasıl yapabilir
+   --> bir deneyi nasıl yapabilir
 -> yukarıda istedikleri bilgiler
