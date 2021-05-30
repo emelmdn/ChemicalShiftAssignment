@@ -9,7 +9,7 @@ This is the source code of the chemical shift assignment project that is develop
 The repository contains all the implementation of the MOEA framework. The chemical shift assignment problect is implemented as additional problem on this framework. 
 For this reason, this repository contains all the implementation of the MOEA framework, but only some models of this framework is used in the chemical shift assignment project.
 
-1. The chemical shift assignment problem
+1. The chemical shift assignment problem implementation
 The source code of the chemical shift assignment project  is existing in the following path: ChemicalShiftAssignment/src/org/moeaframework/problem/chemicalShiftAssignment/. There are also the input files of the problem in this path. Details are explaiend below:
   1.1. The source code of the chemical shift assignment project are composed of the following files in this path. 
         Assignment.java: This class is implemented to define the chemical shift assignment of the expected peaks onto the measured peak
@@ -20,7 +20,7 @@ The source code of the chemical shift assignment project  is existing in the fol
                     All attributes of the problem are defined in this class. Additionally, the newSolution() method of this class creates a new solution according to the defined size and range of the expected peaks.
                     The evaluate() method of this class is used to evaluate the objective values of a solution candidate. This method gets the solution candidate as input parameter. The evaluate() method of the MOEA framemwork in "org.moeaframework.algorithm.AbstractAlgorithm.evaluate(Solution)" is overwritten here with the evaluate() method that evaluates the objective values by calling the evaluate() method, which calls the evaluateObjectives() method to make the objective function calculations. Please see the comments in the source code for more detailed information.
         ChemicalShiftAssignmentInitialization.java: This class implements the initialization method for the population of evolutionary optimization algorithm. The constructor gets the Problem objecct as input parameter, which has the initialization type (either all random, or all with the construction logic, or half-half)
-                    The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class. 
+                    The AbstractEvolutionaryAlgorithm class calls "Solution[] org.moeaframework.core.Initialization.initialize()" method, which is overwritten by the initialize() method of the ChemicalShiftAssignmentInitialization.java class.  This method develops the constructive initialization approach.
         CSTable.java: This class is used to define the input values of the CSTable of Cyana library file. This class contains the details of the reference chemical shift assignment values of the atoms and an array of CSTableReference class objects. 
         CSTableReference.java: This class includes the details of a reference values for an atom in a specific residue. 
         Derf.java: 
@@ -35,10 +35,22 @@ The source code of the chemical shift assignment project  is existing in the fol
         Sequence.java: This class is implemented to save the residue sequence values of the NMR experiments. These values are not used in the chemical shift assignment project.
         ShiftReference.java: This class is developed to save the reference chemical shift values of the atoms. 
         Spectrum.java: This class saves all spectrum related attributes and their functions for all spectrum types of NMR.
- 1.2 The input files of the problem are also in this path. These files are defined below:
+ 1.2. The input files of the problem are also in this path. These files are defined below:
         xxx_exp.peaks: These are the expected peak files that are given as input into our project. 
         xxx.peaks: These are the measured peak files that are given as input into our project.
--> The other files in this path
+        configuration.txt: This file defines the NMR spectra as peaks variable, the name of the sequence file, the name of the shift reference file and the name of the CYANA library file
+        cyana.lib: This is the CYANA library file. This file contains the atoms, their connectivity, and bonds for each residue, along with the connectivity patterns for each spectrum that defines the pattern of the atoms that are expected to give rise to a peak in the NMR experiment.  
+        demo.seq: The sequence of the amino acids that bond to each other to create the protein of the experiment is provided in the demo.seq file. 
+        ref.prot: The reference chemical shift values of the atoms are defined in this file. 
+ 1.3. The output files of the problem are created in this path: /ChemicalShiftAssignment_GitHub/ChemicalShiftAssignmentResults
+        Run results: For each run, one folder is created in this path with the number of the run count. (For ex: "1. Run" folder)
+        Repetition results: The result of each repetition of our algorithm is saved into a separate folder. (For ex: "1. Run/3" shows the result of the 3rd repetition in the 1st run.)
+        
+
+
+
+
+
 -> Sonuç dosylarının olduğu file'lar
 -> Algorithm hybrid için yazdığım kodlar
 -> moea'nın hangi kodlarını kullandığım
