@@ -425,13 +425,17 @@ public class Solution implements Serializable {
 		G = g;
 	}
 
-	//Emel added
+	
+	//Emel added 
 	public void setAtoms(ArrayList<Atom> atoms){
 		int i;
+			
 		for (i = 0; i < atoms.size(); i++){
-			this.atoms.add(atoms.get(i));
+			Atom at = new Atom(atoms.get(i));
+			this.atoms.add(at);
 		}
 	}
+	
 	//Emel added
 	public ArrayList<Atom> getAtoms(){
 		return this.atoms;
